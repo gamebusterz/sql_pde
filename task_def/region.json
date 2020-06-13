@@ -1,0 +1,37 @@
+{
+    "task_name" : "regions",
+    "table" : [
+    {
+    	"name" : "regions",
+    	"columns" : ["region_id","region_name"],
+    	"filters" : {
+    		"region_id" : {
+    			"condition" : ">",
+    			"metric" : 2
+    		}
+    	},
+        "order" : {
+            "region_id" : "ASC"
+        }
+    }
+    ],
+
+    "query" : {
+        "custom" : null
+    },
+
+    "column_transformation" : {
+        "region_name" : "substring_index(region_name,' ',1), substring_index(substring_index(region_name,' ',2),' ',2)"
+    },
+
+    "owner" : {
+    	"name" : "Sailesh Choyal",
+    	"email" : "saileshchoyal@gmail.com"
+    },
+
+    "source" : "mysql",
+    "sink" : "s3",
+    "output_file_format" : "csv", 
+    "output_timezone" : null
+
+}
