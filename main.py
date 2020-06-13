@@ -17,8 +17,8 @@ class Task(object):
         print('a')
 
     def extract_data(self):
-        with MySQLDBConnection(host=config['mysql']['host'], user=config['mysql']['user'],
-                               password=config['mysql']['password'], db=config['mysql']['db']) as connection:
+        with MySQLDBConnection(host=config['databases']['mysql']['host'], user=config['databases']['mysql']['user'],
+                               password=config['databases']['mysql']['password'], db=config['databases']['mysql']['db']) as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM regions;")
             print(cursor.fetchall())
