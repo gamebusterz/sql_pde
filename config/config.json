@@ -1,10 +1,10 @@
 {
   "databases": {
     "mysql": {
-      "host": "localhost",
+      "host": "172.17.0.3",
       "user": "root",
       "password": "docker",
-      "db": "deploy_db"
+      "db": "docker_db"
     }
   }
 }
