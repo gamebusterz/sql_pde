@@ -1,0 +1,37 @@
+{
+    "task_name" : "employees",
+    "table" : [
+    {
+    	"name" : "employees",
+    	"columns" : ["employee_id","first_name","last_name","email","phone_number","hire_date","job_id","salary","manager_id","department_id"],
+    	"filters" : {
+    		"manager_id" : {
+    			"condition" : "!=",
+    			"metric" : 103
+    		}
+    	},
+        "cdc" : {
+            "hire_date" : "1995-05-05"
+        },
+        "split_order" : "employee_id" 
+    }
+    ],
+
+    "query" : {
+        "custom" : null
+    },
+
+    "column_transformation" : {
+    },
+
+    "owner" : {
+    	"name" : "Sailesh Choyal",
+    	"email" : "saileshchoyal@gmail.com"
+    },
+
+    "source" : "mysql",
+    "sink" : "s3",
+    "output_file_format" : "csv", 
+    "output_timezone" : null
+
+}
