@@ -6,5 +6,7 @@
       "password": "docker",
       "db": "docker_db"
     }
-  }
+  },
+  "batch_threshold" : 500,
+  "timezone" : "Asia/Kolkata"
 }

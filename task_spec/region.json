@@ -10,9 +10,7 @@
     			"metric" : 2
     		}
     	},
-        "order" : {
-            "region_id" : "ASC"
-        }
+        "split_order" : "region_id" 
     }
     ],
 

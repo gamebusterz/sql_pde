@@ -1,0 +1,34 @@
+{
+    "task_name" : "mock_data",
+    "table" : [
+    {
+    	"name" : "mock_data",
+    	"columns" : ["id","val"],
+    	"filters" : {
+    	},
+        "cdc" : {
+            "id" : 200
+        },
+        "split_order" : "id"
+
+    }
+    ],
+
+    "query" : {
+        "custom" : null
+    },
+
+    "column_transformation" : {
+    },
+
+    "owner" : {
+    	"name" : "Sailesh Choyal",
+    	"email" : "saileshchoyal@gmail.com"
+    },
+
+    "source" : "mysql",
+    "sink" : "s3",
+    "output_file_format" : "csv", 
+    "output_timezone" : null
+
+}

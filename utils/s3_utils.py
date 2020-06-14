@@ -1,19 +1,16 @@
 import smart_open
 import io
 import csv
-import datetime
-import pytz
-from pytz import timezone
 
-config_tz = timezone('Asia/Kolkata')
+def stream_to_s3(task_name,data,header,timestamp_suffix,**kwargs):
 
-def stream_to_s3(task_name,data,header):
-
-    now_utc = datetime.datetime.now(pytz.utc)
-    filename_suffix = now_utc.strftime('%Y%m%d%H%M%S')
+    if kwargs:
+        file = '_'.join([task_name,timestamp_suffix,str(kwargs['batch_id'])])+'.csv'
+    else:
+        file = '_'.join([task_name,timestamp_suffix])+'.csv'
 
     f = io.StringIO()
-    with smart_open.smart_open('s3://sql-pde-exports/{task_name}/{file}'.format(task_name=task_name,file=task_name+'_'+filename_suffix+'.csv'), 'w') as fout:
+    with smart_open.open('s3://sql-pde-exports/{task_name}/{file}'.format(task_name=task_name,file=file), 'w') as fout:
         _writer = csv.writer(fout)
         _writer.writerow(header)
         fout.write(f.getvalue())
@@ -26,4 +23,4 @@ def stream_to_s3(task_name,data,header):
     
     f.close()
 
-    return task_name+'_'+filename_suffix+'.csv'
+    return file
