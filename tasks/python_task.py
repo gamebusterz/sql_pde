@@ -138,12 +138,15 @@ class PythonTask(object):
         with MySQLDBConnection(host=kwargs['host'], user=kwargs['user'], password=kwargs['password'],
                                db=kwargs['db'],logger=logger) as connection:
 
-            row_batch_size = self.get_batch_size(connection, dbname=kwargs['db'],
+            row_batch_size = self.get_batch_size(connection, 
+                                                 dbname=kwargs['db'],
                                                  tables=[table['name'] for table in kwargs['task_spec']['table']],
-                                                 batch_threshold=kwargs['batch_threshold'])
+                                                 batch_threshold=kwargs['batch_threshold']) if not kwargs['task_spec']['query']['custom'] else None
 
             batch_mode = True if row_batch_size else False
-            query = self.compose_query(kwargs['task_spec'], batch_mode)
+
+            """If custom query doesn't exist in task_spec, call compose_query"""
+            query = self.compose_query(kwargs['task_spec'], batch_mode) if not kwargs['task_spec']['query']['custom'] else kwargs['task_spec']['query']['custom']
 
             cursor = connection.cursor()
 
