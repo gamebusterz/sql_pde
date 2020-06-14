@@ -1,5 +1,6 @@
 import pymysql
 from utils.mysql_db_connection import MySQLDBConnection
+from utils.s3_utils import stream_to_s3
 
 class PythonTask(object):
     def __init__(self):
@@ -38,4 +39,17 @@ class PythonTask(object):
         with MySQLDBConnection(host=kwargs['host'], user=kwargs['user'], password=kwargs['password'], db=kwargs['db']) as connection:
             cursor = connection.cursor()
             cursor.execute(query)
-            print(cursor.fetchall())
+            data = cursor.fetchall()
+
+            # cursor.execute("""SELECT * FROM people LIMIT 0;""")
+            header = [desc[0] for desc in cursor.description]
+            
+            
+            if data:
+                streameed_file = stream_to_s3(kwargs['task_def']['task_name'],data,header)
+                print(streameed_file,'uploaded')
+
+
+
+
+
