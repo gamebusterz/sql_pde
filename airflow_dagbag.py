@@ -1,4 +1,5 @@
-""" Add all DAGs to airflow """
+""" Adds all DAGs to airflow """
+""" This has to be put in the Airflow dag folder """
 
 import os
 

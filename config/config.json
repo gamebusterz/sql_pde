@@ -4,9 +4,11 @@
       "host": "172.17.0.3",
       "user": "root",
       "password": "docker",
-      "db": "docker_db"
+      "db": "docker_db",
+      "port" : 3306
     }
   },
   "batch_threshold" : 500,
-  "timezone" : "Asia/Kolkata"
+  "timezone" : "Asia/Kolkata",
+  "FILE_COMPRESSION" : "gzip"
 }

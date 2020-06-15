@@ -3,6 +3,7 @@ import json
 import argparse
 import datetime
 import pytz
+import time
 import coloredlogs,logging
 
 from pytz import timezone
@@ -34,7 +35,13 @@ if __name__ == '__main__':
 	"""Command line argument parser"""
 	parser = argparse.ArgumentParser(description='Periodic Data Extraction from MySQL')
 	parser.add_argument("-s", "--spec", help="Task spec JSON file (rel/abs path)", default='task_spec/mock_data.json', required=False)
-	
+	parser.add_argument("-d", "--db", help="db for MySQL source", default=config['databases']['mysql']['db'], required=False)
+	parser.add_argument("-H", "--host", help="hostname for db", default=config['databases']['mysql']['host'], required=False)
+	parser.add_argument("-P", "--password", help="password for db", default=config['databases']['mysql']['password'], required=False)
+	parser.add_argument("-u", "--user", help="user for db", default=config['databases']['mysql']['user'], required=False)
+	parser.add_argument("-p", "--port", help="port for db", default=config['databases']['mysql']['port'], required=False)
+	parser.add_argument("-b", "--batch", help="Batch threshold in MB (to split tables larger than batch threshold)", default=config['batch_threshold'], required=False)
+
 	args = parser.parse_args()
 
 	"""Read task spec"""
@@ -44,8 +51,14 @@ if __name__ == '__main__':
 		logger.critical('task spec does not exist, exiting')
 		sys.exit(0)
 
+	start = time.time()
+
 	t = PythonTask()
 	logger.debug('Calling extract_data')
-	t.extract_data(task_spec=task_spec, timezone=config['timezone'], host=config['databases']['mysql']['host'], user=config['databases']['mysql']['user'], password=config['databases']['mysql']['password'], db=config['databases']['mysql']['db'], batch_threshold=config['batch_threshold'],logger=logger)
 
+	if args.db and args.host and args.password and args.user and args.port:
+		t.extract_data(task_spec=task_spec, timezone=config['timezone'], host=args.host, user=args.user, password=args.password, db=args.db, batch_threshold=config['batch_threshold'],logger=logger)
+
+	end = time.time()
+	logger.info('Time for completion: {time_diff}s'.format(time_diff=round((end - start),3)))
 
