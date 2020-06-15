@@ -144,3 +144,4 @@ Hello CRON my old friend !
     * Row-by-row transformation using a python function
     * Transformation layer using Pandas (optimal when processing a large file as input, instead of row-by-row)
 6. Parallelization : Some independent tasks can be parallelized, like extracting batches of rows from MySQL, however the sequence of batches wouln't be maintained in this case. If this is acceptable, the file-streaming to S3 can also be parallelized similarly.
+7. I went with a structure where one task_spec deals with one table, and I didn't want to make any last minute changes. It'll only need some minor changes in one file to achieve that. Currently only one table can be exported in the task_spec or multiple tables JOINed together.
