@@ -38,7 +38,7 @@ employees_dag = DAG(
     default_args=default_args,
     description='Scheduled on 8:00 AM every day',
     # schedule_interval=timedelta(days=1),
-    schedule_interval='*/2 * * * *',
+    schedule_interval='0 8 * * *',
 )
 
 """Execute Task in dags directory"""
