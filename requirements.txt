@@ -1,0 +1,5 @@
+coloredlogs==10.0
+smart_open==2.0.0
+PyMySQL==0.8.0
+pytz==2019.1
+typing==3.7.4.1
