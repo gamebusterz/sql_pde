@@ -6,7 +6,7 @@ The framework takes a task spec and connects to a MySQL DB to get the set of tab
 To get the tables size and row count, it uses the system tables to find an approximate number much quicker than doing a `COUNT(*)`. The `batch_threshold` is configurable.
 
 I have also built a real-time ingestion mechanism using Kafka, reading MySQL binlogs for any INSERTs/UPDATEs/DELETEs, which can be converted into a file ready to loaded to a Data Warehouse or be used in a Data Lake. 
-However I've not include it here because that would serve a difference purpose, and to make it work for this, we'd have to persist the data in Kafka days. But a hybrid approach can be built which can read data from either of these two. Let me know if you need to take a look at it.
+However I've not include it here because that would serve a difference purpose, and to make it work for this, we'd have to persist the data in Kafka for days. Let me know if you need to take a look at it. Also, a hybrid approach can probably be built which can read data from either of these two. 
 
 ## a. Steps to run
 1. Install MySQL. Preferrably v5.6+.
